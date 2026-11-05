@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relógio de 20 Horas — Daniel Silva</title>
+    <meta name="description"
+        content="Um projeto inovador de reimaginação do tempo: o Relógio de 20 Horas, onde cada hora equivale a 72 minutos, mantendo os 86.400 segundos do dia.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* SVG Icon shared styles */
+        .ico {
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+
+        .math-icon .ico,
+        .why-icon .ico {
+            display: block;
+        }
+
+        .hero-badge .ico {
+            margin-right: .4rem;
+        }
+
+        .footer-clock-icon .ico {
+            display: block;
+        }
+
+        .formula-title .ico {
+            margin-right: .5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section id="hero" class="hero">
+        <div class="hero-bg">
+            <div class="particle" style="--x:10%;--y:20%;--d:3s;--s:6px;"></div>
+            <div class="particle" style="--x:80%;--y:10%;--d:4s;--s:4px;"></div>
+            <div class="particle" style="--x:60%;--y:80%;--d:2.5s;--s:8px;"></div>
+            <div class="particle" style="--x:30%;--y:70%;--d:5s;--s:3px;"></div>
+            <div class="particle" style="--x:90%;--y:50%;--d:3.5s;--s:5px;"></div>
+            <div class="particle" style="--x:5%;--y:90%;--d:4.5s;--s:4px;"></div>
+            <div class="particle" style="--x:50%;--y:5%;--d:2s;--s:7px;"></div>
+            <div class="particle" style="--x:75%;--y:60%;--d:6s;--s:3px;"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <!-- Clock icon -->
+                <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                </svg>
+                Projeto de Inovação Temporal
+            </div>
+            <h1 class="hero-title">
+                <span class="title-line">Relógio de</span>
+                <span class="title-highlight">20 Horas</span>
+            </h1>
+            <p class="hero-subtitle">
+                E se o dia fosse dividido em <strong>20 horas</strong> em vez de 24?<br>
+                Um projeto que reimagina o tempo mantendo cada segundo do universo.
+            </p>
+            <div class="hero-author">
+                <div class="author-avatar">DS</div>
+                <div class="author-info">
+                    <span class="author-name">Daniel Silva</span>
+                    <span class="author-origin">
+                        <!-- Map pin icon -->
+                        <svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:.3rem">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                        Brasil
+                    </span>
+                </div>
+            </div>
+            <a href="#clock-section" class="hero-cta" id="btn-ver-relogio">
+                Ver o Relógio
+                <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:.4rem">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <polyline points="19 12 12 19 5 12" />
+                </svg>
+            </a>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-dot"></div>
+        </div>
+    </section>
+
+    <!-- ===== CLOCK SECTION ===== -->
+    <section id="clock-section" class="clock-section">
+        <div class="section-header">
+            <h2 class="section-title">O Relógio Funcional</h2>
+            <p class="section-desc">Ponteiros em tempo real calculados com base nas 20 horas do dia</p>
+        </div>
+
+        <div class="clock-wrapper">
+            <!-- Analog Clock -->
+            <div class="clock-container">
+                <div class="clock-face" id="clockFace">
+                    <div class="clock-glow"></div>
+                    <!-- Hour marks will be injected by JS -->
+                    <div class="clock-marks" id="clockMarks"></div>
+
+                    <!-- Hands -->
+                    <div class="hand hour-hand" id="hourHand"></div>
+                    <div class="hand minute-hand" id="minuteHand"></div>
+                    <div class="hand second-hand" id="secondHand"></div>
+                    <div class="clock-center"></div>
+                    <div class="clock-center-dot"></div>
+                </div>
+            </div>
+
+            <!-- Digital Display -->
+            <div class="digital-display">
+                <div class="digital-label">HORA NO SISTEMA DE 20H</div>
+                <div class="digital-time" id="digitalTime">00:00:00</div>
+                <div class="digital-label">HORA REAL (24H)</div>
+                <div class="digital-real" id="digitalReal">00:00:00</div>
+
+                <div class="time-stats">
+                    <div class="stat-card" id="statHora">
+                        <div class="stat-value" id="statHoraVal">--</div>
+                        <div class="stat-label">Hora (0–19)</div>
+                    </div>
+                    <div class="stat-card" id="statMin">
+                        <div class="stat-value" id="statMinVal">--</div>
+                        <div class="stat-label">Minuto (0–71)</div>
+                    </div>
+                    <div class="stat-card" id="statSec">
+                        <div class="stat-value" id="statSecVal">--</div>
+                        <div class="stat-label">Segundo (0–59)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MATH SECTION ===== -->
+    <section id="math-section" class="math-section">
+        <div class="section-header">
+            <h2 class="section-title">A Matemática Por Trás</h2>
+            <p class="section-desc">Como dividir o dia em 20 horas sem perder nenhum segundo</p>
+        </div>
+
+        <div class="math-grid">
+            <div class="math-card" id="card-dias">
+                <div class="math-icon">
+                    <!-- Calendar / day icon -->
+                    <svg class="ico" width="44" height="44" viewBox="0 0 24 24" fill="none"
+                        stroke="rgba(34,197,94,0.85)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                        <line x1="8" y1="14" x2="8.01" y2="14" />
+                        <line x1="12" y1="14" x2="12.01" y2="14" />
+                        <line x1="16" y1="14" x2="16.01" y2="14" />
+                    </svg>
+                </div>
+                <div class="math-equation">
+                    <span class="eq-label">Minutos no dia</span>
+                    <span class="eq-formula">24 × 60 = <strong>1.440 min</strong></span>
+                </div>
+            </div>
+            <div class="math-card" id="card-hora-min">
+                <div class="math-icon">
+                    <!-- Stopwatch / division icon -->
+                    <svg class="ico" width="44" height="44" viewBox="0 0 24 24" fill="none"
+                        stroke="rgba(34,197,94,0.85)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="13" r="8" />
+                        <polyline points="12 9 12 13 14.5 15" />
+                        <path d="M5.07 7a10 10 0 0 1 13.86 0" />
+                        <line x1="10" y1="3" x2="14" y2="3" />
+                    </svg>
+                </div>
+                <div class="math-equation">
+                    <span class="eq-label">Minutos por hora</span>
+                    <span class="eq-formula">1.440 ÷ 20 = <strong>72 min/h</strong></span>
+                </div>
+            </div>
+            <div class="math-card" id="card-segundos">
+                <div class="math-icon">
+                    <!-- Shield / preserved seconds icon -->
+                    <svg class="ico" width="44" height="44" viewBox="0 0 24 24" fill="none"
+                        stroke="rgba(34,197,94,0.85)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        <polyline points="9 12 11 14 15 10" />
+                    </svg>
+                </div>
+                <div class="math-equation">
+                    <span class="eq-label">Segundos no dia</span>
+                    <span class="eq-formula">86.400 seg <strong>intactos</strong></span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section-header">
+            <h2 class="section-title">Entenda:</h2>
+            <p class="section-desc">O dia continua com 1.440 minutos e 86.400 segundos.</p>
+            <p class="section-desc">O que muda é a quantidade de minutos para cada hora.</p>
+            <p class="section-desc">Passando de 60min para 72min.</p>
+        </div>
+        <div class="formula-box" id="formulaBox">
+            <div class="formula-title">
+                <!-- Function / formula icon -->
+                <svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:.5rem">
+                    <path d="M15 3a4 4 0 0 1 .553 7.964L12 16H8l3.553-5.036A4 4 0 0 1 15 3z" />
+                    <path d="M9 21a4 4 0 0 1-.553-7.964L12 8h4l-3.553 5.036A4 4 0 0 1 9 21z" />
+                </svg>
+                Fórmula de Conversão
+            </div>
+            <div class="formula-content">
+                <div class="formula-line">
+                    <span class="f-var">H₂₀</span>
+                    <span class="f-op">=</span>
+                    <span class="f-expr">⌊ (segundos totais do dia) ÷ 4.320 ⌋</span>
+                </div>
+                <div class="formula-line">
+                    <span class="f-var">M₇₂</span>
+                    <span class="f-op">=</span>
+                    <span class="f-expr">⌊ (resto ÷ 4.320) × 72 ⌋</span>
+                </div>
+                <div class="formula-line">
+                    <span class="f-var">S₆₀</span>
+                    <span class="f-op">=</span>
+                    <span class="f-expr">resto mod 60</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHY SECTION ===== -->
+    <section id="why-section" class="why-section">
+        <div class="section-header">
+            <h2 class="section-title">Por que 20 Horas?</h2>
+            <p class="section-desc">A proposta filosófica e matemática do projeto</p>
+        </div>
+
+        <div class="why-grid">
+            <div class="why-card" id="why1">
+                <div class="why-icon">
+                    <!-- Globe icon -->
+                    <svg class="ico" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                        stroke="rgba(34,197,94,0.75)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                    </svg>
+                </div>
+                <h3>Divisão Natural</h3>
+                <p>20 é divisível por 1, 2, 4, 5, 10 e 20 — uma base mais intuitiva para dividir o dia em partes iguais
+                    (manhã, tarde, noite e madrugada com 5 horas cada).</p>
+            </div>
+            <div class="why-card" id="why2">
+                <div class="why-icon">
+                    <!-- Layers / preserve icon -->
+                    <svg class="ico" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                        stroke="rgba(34,197,94,0.75)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                        <polyline points="2 17 12 22 22 17" />
+                        <polyline points="2 12 12 17 22 12" />
+                    </svg>
+                </div>
+                <h3>Segundos Preservados</h3>
+                <p>O projeto mantém os 86.400 segundos exatos do dia solar. O tempo físico não muda — apenas a
+                    nomenclatura das horas é redesenhada.</p>
+            </div>
+            <div class="why-card" id="why3">
+                <div class="why-icon">
+                    <!-- Grid / base-10 icon -->
+                    <svg class="ico" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                        stroke="rgba(34,197,94,0.75)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7" />
+                        <rect x="14" y="3" width="7" height="7" />
+                        <rect x="14" y="14" width="7" height="7" />
+                        <rect x="3" y="14" width="7" height="7" />
+                    </svg>
+                </div>
+                <h3>Simplicidade Base-10</h3>
+                <p>Com 20 horas, trabalhamos mais próximos do sistema decimal, facilitando cálculos mentais e a
+                    percepção intuitiva do dia.</p>
+            </div>
+            <div class="why-card" id="why4">
+                <div class="why-icon">
+                    <!-- Zap / idea icon -->
+                    <svg class="ico" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                        stroke="rgba(34,197,94,0.75)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="8" x2="12" y2="12" />
+                        <line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
+                </div>
+                <h3>Questionamento Criativo</h3>
+                <p>Por que 24? A resposta é histórica, não matemática. Este projeto propõe repensar convenções e
+                    explorar alternativas funcionais.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer" id="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="footer-clock-icon">
+                    <svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(34,197,94,0.9)"
+                        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                </span>
+                <span class="footer-brand">Relógio de 20 Horas</span>
+            </div>
+            <p class="footer-author">
+                Criado por <strong>Daniel Silva</strong>
+                <svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin:0 .25rem">
+                    <circle cx="12" cy="12" r="10" />
+                    <path
+                        d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                Brasil
+            </p>
+            <p class="footer-note">O tempo é uma convenção. Reimagine-o.</p>
+        </div>
+    </footer>
+
+    <!-- Nav dots -->
+    <nav class="side-nav" aria-label="Navegação por seções">
+        <a href="#hero" class="nav-dot active" id="nav-hero" title="Início"></a>
+        <a href="#clock-section" class="nav-dot" id="nav-clock" title="Relógio"></a>
+        <a href="#math-section" class="nav-dot" id="nav-math" title="Matemática"></a>
+        <a href="#why-section" class="nav-dot" id="nav-why" title="Por quê?"></a>
+    </nav>
+
+    <script src="clock.js"></script>
+</body>
+
+</html>
